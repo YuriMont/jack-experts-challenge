@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Task {
+  id        Int      @id @default(autoincrement())
+  title     String   @unique
+  content   String
+  color_id  Int?
+  author_id String
+  favorite  Boolean? @default(false)
+  author    User     @relation(fields: [author_id], references: [id])
+  color     Color?   @relation(fields: [color_id], references: [id])
+
+  @@index([color_id], name: "index_color_id")
+  @@map("tb_tasks")
+}
+
+model User {
+  id       String @id @default(uuid())
+  name     String
+  email    String @unique
+  password String
+  tasks    Task[]
+
+  @@map("tb_users")
+}
+
+model Color {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  code  String @unique
+  tasks Task[]
+
+  @@index([name], name: "index_color_name")
+  @@map("tb_colors")
+}
