@@ -94,7 +94,6 @@ nome-do-repositorio/
 ├── server/             # Código fonte do backend
 │   ├── prisma/
 │   │   ├── migrations/
-│   │   ├── dev.db
 │   │   └── schema.prisma
 │   ├── src/
 │   │   ├── controllers/
