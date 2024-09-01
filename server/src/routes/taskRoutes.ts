@@ -10,8 +10,8 @@ taskRouter.post("/", checkToken, TaskController.createTask);
 taskRouter.put("/:id", checkToken, TaskController.updateTask);
 taskRouter.delete("/:id", TaskController.deleteTaskById);
 
-taskRouter.get("/favorites", checkToken, TaskController.getAllFavoritesTasks);
-taskRouter.put("/favorites/:id", checkToken, TaskController.toggleFavoriteTaskById);
+taskRouter.get("/completed", checkToken, TaskController.getAllFavoritesTasks);
+taskRouter.put("/completed/:id", checkToken, TaskController.toggleFavoriteTaskById);
 
 export default taskRouter;
 

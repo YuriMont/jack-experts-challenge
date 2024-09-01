@@ -15,7 +15,7 @@ export default class TaskServices {
         title: true,
         content: true,
         color: true,
-        favorite: true,
+        completed: true,
       }
     });
 
@@ -32,31 +32,30 @@ export default class TaskServices {
         title: true,
         content: true,
         color: true,
-        favorite: true,
+        completed: true,
       }
     });
   }
 
-  static async createTask({ title, content, author_id, color_id, favorite }: CreateTaskParams) {
+  static async createTask({ title, content, author_id, color_id }: CreateTaskParams) {
     return await prisma.task.create({
       data: {
         title,
         content,
         author_id,
         color_id,
-        favorite
       },
       select: {
         id: true,
         title: true,
         content: true,
         color: true,
-        favorite: true,
+        completed: true,
       }
     });
   }
 
-  static async updateTask({ id, title, content, color }: ITask) {
+  static async updateTask(userId: string, { id, title, content, color }: ITask) {
     return await prisma.task.update({
       data: {
         title,
@@ -65,11 +64,14 @@ export default class TaskServices {
       },
       where: {
         id,
+        AND: {
+          author_id: userId
+        }
       },
       select:{
         color: true,
         content: true,
-        favorite: true,
+        completed: true,
         id: true,
         title: true,
         color_id: true,
@@ -77,27 +79,33 @@ export default class TaskServices {
     });
   }
 
-  static async deleteTask(id: number) {
+  static async deleteTask(id: string, userId: string) {
     await prisma.task.delete({
       where: {
-        id,
+        id: Number(id),
+        AND: {
+          author_id: userId
+        },
       },
     });
   }
 
-  static async toggleFavorite(id: number) {
-    const getFavoriteValue = await prisma.task.findFirst({
+  static async toggleFavorite(id: number, userId: string) {
+    const getCompletedValue = await prisma.task.findFirst({
       where: {
         id,
+        AND: {
+          author_id: userId
+        }
       },
       select: {
-        favorite: true,
+        completed: true,
       },
     });
 
     await prisma.task.update({
       data: {
-        favorite: !getFavoriteValue?.favorite,
+        completed: !getCompletedValue?.completed,
       },
       where: {
         id,
@@ -105,17 +113,17 @@ export default class TaskServices {
     });
   }
 
-  static async getAllFavorites(author_id: string){
+  static async getAllCompleteds(author_id: string){
     return await prisma.task.findMany({
       where: {
-        favorite: true,
+        completed: true,
         author_id,
       },
       select: {
         title: true,
         content: true,
         color: true,
-        favorite: true,
+        completed: true,
       }
     })
   }

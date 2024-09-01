@@ -2,7 +2,6 @@ export interface CreateTaskParams{
     title: string;
     content: string;
     author_id: string;
-    favorite?: boolean;
     color_id?: number;
 }
 

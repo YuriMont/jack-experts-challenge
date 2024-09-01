@@ -18,7 +18,7 @@ export default class TaskController {
   static async getAllFavoritesTasks(req: Request, res: Response) {
     try {
       const { userId } = req.params;
-      const tasks = await TaskServices.getAllFavorites(userId);
+      const tasks = await TaskServices.getAllCompleteds(userId);
 
       return res.status(200).json(tasks);
     } catch (error) {
@@ -40,9 +40,9 @@ export default class TaskController {
 
   static async deleteTaskById(req: Request, res: Response) {
     try {
-      const id = Number(req.params.id);
+      const {userId, id} = req.params;
 
-      await TaskServices.deleteTask(id);
+      await TaskServices.deleteTask(id, userId);
 
       return res.status(200).json({ message: "Task deleted successfully!" });
     } catch (error) {
@@ -52,7 +52,7 @@ export default class TaskController {
 
   static async updateTask(req: Request, res: Response) {
     try {
-      const id = Number(req.params.id);
+      const { id, userId } = req.params;
 
       const updateTaskSchema = z.object({
         title: z.string().min(3, "the title must have more than 3 characters"),
@@ -64,7 +64,7 @@ export default class TaskController {
 
       const bodyRequest = updateTaskSchema.parse(req.body);
 
-      const task = await TaskServices.updateTask({ id, ...bodyRequest });
+      const task = await TaskServices.updateTask(userId, { id: Number(id), ...bodyRequest });
 
       return res.status(200).json(task);
     } catch (error) {
@@ -79,7 +79,6 @@ export default class TaskController {
         content: z
           .string()
           .min(10, "the content must have more than 10 characters"),
-        favorite: z.boolean().optional(),
         color_id: z.number().optional(),
       });
 
@@ -100,8 +99,8 @@ export default class TaskController {
 
   static async toggleFavoriteTaskById(req: Request, res: Response) {
     try {
-      const id = Number(req.params.id);
-      await TaskServices.toggleFavorite(id);
+      const {id, userId} = req.params;
+      await TaskServices.toggleFavorite(Number(id), userId);
 
       return res.status(200).json({ message: "Task updated successfully!" });
     } catch (error) {

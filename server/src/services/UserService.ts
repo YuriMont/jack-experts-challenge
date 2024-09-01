@@ -19,6 +19,11 @@ export class UserService {
         name,
         password: password_encrypted,
       },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+      }
     });
 
     return user;
