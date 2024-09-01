@@ -327,8 +327,9 @@ Todas as rotas devem ser passadas um Bearer Token
 * Exemplo de Requisição:
 ```
 {
-  "title": "tarefa 1",
-  "content": "Limpar a casa"
+  "title": "Task 3",
+  "content": "This is the content of task 3.",
+  "color_id": "1"
 }
 ```
 
@@ -340,7 +341,7 @@ Todas as rotas devem ser passadas um Bearer Token
     "content": "This is the content of task 3.",
     "completed": false,
     "color": {
-      "id": 103,
+      "id": 1,
       "name": "Green",
       "code": "#00FF00"
     }
@@ -371,7 +372,7 @@ Todas as rotas devem ser passadas um Bearer Token
     "content": "This is the content of task 3.",
     "completed": false,
     "color": {
-      "id": 103,
+      "id": 1,
       "name": "Green",
       "code": "#00FF00"
     }
