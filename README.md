@@ -37,9 +37,9 @@ Este bloco de tarefas é uma aplicação fullstack que permite a gestão de tare
 ### Clonando o Repositório
 
 ```bash
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
+git clone https://github.com/YuriMont/jack-experts-challenge.git
 
-cd nome-do-repositorio
+cd jack-experts-challenge
 ```
 
 ### Backend
@@ -138,6 +138,7 @@ nome-do-repositorio/
 
 ### Backend
 * `npm run start`: Inicia o servidor Node.js em modo de produção.
+* `npm run seed`: Cria 10 cores e as insere no banco de dados
 * `npm run dev`: Inicia o servidor Node.js em modo de desenvolvimento com auto-reload.
 
 ### Frontend
