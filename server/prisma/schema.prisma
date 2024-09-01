@@ -16,7 +16,7 @@ model Task {
   content   String
   color_id  Int?
   author_id String
-  favorite  Boolean? @default(false)
+  completed  Boolean? @default(false)
   author    User     @relation(fields: [author_id], references: [id])
   color     Color?   @relation(fields: [color_id], references: [id])
 
