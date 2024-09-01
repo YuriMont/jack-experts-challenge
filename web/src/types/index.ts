@@ -9,13 +9,12 @@ export interface Task {
     title: string;
     content: string;
     color: Color;
-    favorite: boolean;
+    completed: boolean;
 }
 
 export interface CreateTaskParams{
     title: string;
     content: string;
     color_id?: number;
-    favorite?: boolean;
 }
 

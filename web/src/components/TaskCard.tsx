@@ -19,7 +19,7 @@ interface TaskCardProps {
 }
 
 export function TaskCard({ task }: TaskCardProps) {
-  const { colorsQuery, editTask, deleteTask, toggleFavorite } = useTask();
+  const { colorsQuery, editTask, deleteTask, toggleComplete } = useTask();
   const [isEditing, setIsEditing] = useState(false);
 
   const { register, handleSubmit } = useForm<TaskSchema>({
@@ -47,10 +47,10 @@ export function TaskCard({ task }: TaskCardProps) {
     >
       <Star
         className="absolute top-5 right-2 cursor-pointer"
-        onClick={() => toggleFavorite(task.id)}
+        onClick={() => toggleComplete(task.id)}
         size={20}
-        color={task.favorite ? "#ffff00" : "#121212"}
-        weight={task.favorite ? "fill" : "regular"}
+        color={task.completed ? "#ffff00" : "#121212"}
+        weight={task.completed ? "fill" : "regular"}
       />
       <input
         type="text"

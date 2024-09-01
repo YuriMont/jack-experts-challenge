@@ -28,7 +28,6 @@ async function createTask(task: CreateTaskParams): Promise<Task> {
         title: task.title,
         content: task.content,
         color_id: task.color_id,
-        favorite: task.favorite,
       },
       {
         headers: {
@@ -90,10 +89,10 @@ async function deleteTaskById(id: number) {
   }
 }
 
-async function toggleFavoriteTask(id: number) {
+async function toggleCompletedTask(id: number) {
 
   try {
-    await api.put(`/tasks/favorites/${id}`, {}, {
+    await api.put(`/tasks/completed/${id}`, {}, {
       headers: {
         Authorization: `Bearer ${cookies.get("token")}`,
       },
@@ -151,8 +150,8 @@ export function useTask(query?: string) {
     },
   });
 
-  const toggleFavoriteMutation = useMutation({
-    mutationFn: toggleFavoriteTask,
+  const toggleCompletedMutation = useMutation({
+    mutationFn: toggleCompletedTask,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks-data"] });
     },
@@ -190,6 +189,6 @@ export function useTask(query?: string) {
     editTask: editTaskMutation.mutate,
     deleteTask: deleteTaskMutation.mutate,
     createTask: createTaskMutation.mutate,
-    toggleFavorite: toggleFavoriteMutation.mutate,
+    toggleComplete: toggleCompletedMutation.mutate,
   };
 }
