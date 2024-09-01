@@ -15,7 +15,7 @@
 
 ## Descrição
 
-Este bloco de tarefas é uma aplicação fullstack que permite a gestão de tarefas. O frontend é construído em React, enquanto o backend é desenvolvido com Node.js e Express. A aplicação permite que usuários criem, editem e excluam tarefas, com persistência de dados em um banco de dados SQLite. Possuindo as seguintes funções: 
+Este bloco de tarefas é uma aplicação fullstack que permite a gestão de tarefas. O frontend é construído em React, enquanto o backend é desenvolvido com Node.js e Express. A aplicação permite que usuários criem, editem e excluam tarefas, com persistência de dados em um banco de dados MySQL. Possuindo as seguintes funções: 
 
 * Cadastro de Usuário. O usuário deve ser capaz de se cadastrar com e-mail e senha. Implementar validação básica para e-mail e senha.
 
@@ -30,7 +30,7 @@ Este bloco de tarefas é uma aplicação fullstack que permite a gestão de tare
 
 - **Node.js** versão 20.x ou superior
 - **NPM** versão 10.x ou superior (ou **Yarn**)
-- **Banco de Dados**: SQLite
+- **Banco de Dados**: MySQL
 
 ## Instalação
 
@@ -151,7 +151,7 @@ nome-do-repositorio/
 ### Variáveis de Ambiente
 No diretório `server`, crie um arquivo `.env` com as seguintes variáveis:
 ```
-DATABASE_URL="file:./dev.db"
+DATABASE_URL="<url_do_banco_de_dados>"
 SECRET="<secret>"
 ```
 No diretório `wev`, crie um arquivo `.env.local` com a seguinte variável:
