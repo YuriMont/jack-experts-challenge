@@ -150,10 +150,10 @@ nome-do-repositorio/
 ### Variáveis de Ambiente
 No diretório `server`, crie um arquivo `.env` com as seguintes variáveis:
 ```
-DATABASE_URL="<url_do_banco_de_dados>"
+DATABASE_URL="mysql://<usuario>:<senha>@<host>:<porta>/<nome_banco_de_dados>"
 SECRET="<secret>"
 ```
-No diretório `wev`, crie um arquivo `.env.local` com a seguinte variável:
+No diretório `web`, crie um arquivo `.env.local` com a seguinte variável:
 ```
 VITE_API_BACKEND_URL="<url_do_server>"
 ```
